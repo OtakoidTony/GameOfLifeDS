@@ -2,12 +2,25 @@
 #include <nds.h>	// Include for NDS_Lib
 #include <stdio.h>
 
+#include <nf_lib.h>
+#include <unistd.h>
+
+// C++ Includes
+#include <iostream>
+#include <string>
+
+
 #define WHITE 0xFFFF
 #define BLACK 0x0000
 #define SKY 0xEEEF
 #define BLUE 0xFC00
 #define MAGENTA 0xFC1F
 #define CYAN 0xFFE0
+
+void OnKeyPressed(int key) {
+   if(key > 0)
+      iprintf("%c", key);
+}
 
 void draw_shape(int x, int y, uint16* buffer, uint16 color)
 {
@@ -16,22 +29,20 @@ void draw_shape(int x, int y, uint16* buffer, uint16 color)
 	*line++ = color;
 }
 
-void draw_shape(int x, int y, uint16* buffer, uint16 color, int xsize, int ysize) {
-	int xtemp = 0;
-	int ytemp = 0;
+void draw_shape(int x, int y, uint16* buffer, uint16 color, int xsize, int ysize){
+	int xtemp=0;
+	int ytemp=0;
 
-	while (xtemp < xsize) {
-		while (ytemp < ysize) {
-			draw_shape(x + xtemp, y + ytemp, buffer, color);
+	while(xtemp<xsize){
+		while(ytemp<ysize){
+			draw_shape(x+xtemp,y+ytemp,buffer,color);
 
-			ytemp = ytemp + 1;
+			ytemp=ytemp+1;
 		}
-		ytemp = 0;
-		xtemp = xtemp + 1;
+		ytemp=0;
+		xtemp=xtemp+1;
 	}
-
-
-
+}
 	short screenbuffer_maindisplay[49152];
 	short screen_width = 256;
 	short screen_height = 192;
